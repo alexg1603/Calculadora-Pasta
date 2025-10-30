@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<!-- saved from url=(0112)file:///C:/Users/A6101556/OneDrive%20-%20Saint-Gobain/Escritorio/Calculadora%20de%20Pasta%20de%20Plata%20v2.html -->
+<html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Calculadora de Pasta de Plata</title>
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #FFD700;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        select, input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+        .section {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .note {
+            color: red;
+            font-size: 0.9em;
+        }
+        #resultado {
+            background-color: #e8f0fe;
+            border-left: 5px solid #001f3f;
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #001f3f;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #001f3f;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #001f3f;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #003366;
+        }
+    </style>
+</head>
+<body>
+<h1>Calculadora de Pasta de Plata</h1><div style="text-align:center; margin-bottom:20px;"><button onclick="calcular()" style="background-color:#c00; color:white; border:2px outset #800; padding:10px 20px; margin:0 10px; font-weight:bold; cursor:pointer;">Calcular</button><button onclick="limpiar()" style="background-color:#c00; color:white; border:2px outset #800; padding:10px 20px; margin:0 10px; font-weight:bold; cursor:pointer;" type="button">Limpiar</button><button onclick="exportarExcel();" style="background-color:#c00; color:white; border:2px outset #800; padding:10px 20px; margin:0 10px; font-weight:bold; cursor:pointer;" type="button">Exportar a Excel</button></div>
+<div class="section">
+<label for="vidrio">Tipo de vidrio:</label>
+<select id="vidrio">
+<option value="BL">BL (70% y 85%)</option>
+<option value="WS">WS (60% y 88%)</option>
+</select>
+<label for="tipoPasta">Tipo de pasta:</label>
+<select id="tipoPasta">
+<option value="base">Pastas base</option>
+<option value="una">Una pasta preparada</option>
+<option value="ambas">Ambas pastas preparadas</option>
+</select>
+<div id="inputs">
+                    <label for="riquezaDeseada">¿Qué riqueza deseas preparar?</label>
+                    <input type="number" id="riquezaDeseada" onkeydown="siguienteCampo(event, &#39;cantidadTotal&#39;)">
+                    <label for="cantidadTotal">¿Qué cantidad total deseas preparar?</label>
+                    <input type="number" id="cantidadTotal" onkeydown="calcularEnter(event)">
+                </div>
+
+<div id="resultado">Debes mezclar 55 g de pasta 70% y 49 g de pasta 85% para obtener 104 g con 77% de riqueza.</div>
+</div>
+<table id="historial">
+<thead>
+<tr>
+<th>Fecha y Hora</th>
+<th>Vidrio</th>
+<th>Tipo de Pasta</th>
+<th>Riqueza Deseada</th>
+<th>Resultado</th>
+</tr>
+</thead>
+<tbody><tr><td>28/10/2025, 1:55:31 p.m.</td><td>BL</td><td>base</td><td>77%</td><td>Debes mezclar 1067 g de pasta 70% y 933 g de pasta 85% para obtener 2000 g con 77% de riqueza.</td></tr><tr><td>28/10/2025, 1:56:22 p.m.</td><td>BL</td><td>base</td><td>76%</td><td>Debes mezclar 120 g de pasta 70% y 80 g de pasta 85% para obtener 200 g con 76% de riqueza.</td></tr><tr><td>28/10/2025, 2:05:22 p.m.</td><td>BL</td><td>base</td><td>77%</td><td>Debes mezclar 213 g de pasta 70% y 187 g de pasta 85% para obtener 400 g con 77% de riqueza.</td></tr><tr><td>28/10/2025, 3:22:20 p.m.</td><td>BL</td><td>una</td><td>78%</td><td>Debes agregar 80 g de pasta de 85% para obtener 640 g con 78% de riqueza.</td></tr><tr><td>28/10/2025, 3:23:30 p.m.</td><td>BL</td><td>base</td><td>77%</td><td>Debes mezclar 427 g de pasta 70% y 373 g de pasta 85% para obtener 800 g con 77% de riqueza.</td></tr><tr><td>28/10/2025, 3:23:51 p.m.</td><td>BL</td><td>una</td><td>79%</td><td>Debes agregar 175 g de pasta de 85% para obtener 475 g con 79% de riqueza.</td></tr><tr><td>28/10/2025, 3:32:07 p.m.</td><td>BL</td><td>ambas</td><td>74.5%</td><td>Debes agregar 500 g de pasta de 74% para obtener 1000 g con 74.5% de riqueza.</td></tr><tr><td>28/10/2025, 3:48:38 p.m.</td><td>BL</td><td>base</td><td>77%</td><td>Debes mezclar 267 g de pasta 70% y 233 g de pasta 85% para obtener 500 g con 77% de riqueza.</td></tr><tr><td>28/10/2025, 3:51:29 p.m.</td><td>BL</td><td>base</td><td>77%</td><td>Debes mezclar 53 g de pasta 70% y 47 g de pasta 85% para obtener 100 g con 77% de riqueza.</td></tr><tr><td>28/10/2025, 3:51:35 p.m.</td><td>BL</td><td>base</td><td>77%</td><td>Debes mezclar 55 g de pasta 70% y 49 g de pasta 85% para obtener 104 g con 77% de riqueza.</td></tr></tbody>
+</table>
+<script>
+        const inputsDiv = document.getElementById("inputs");
+        const resultadoDiv = document.getElementById("resultado");
+        const historialBody = document.querySelector("#historial tbody");
+
+        document.getElementById("tipoPasta").addEventListener("change", mostrarInputs);
+        document.getElementById("vidrio").addEventListener("change", mostrarInputs);
+
+        function mostrarInputs() {
+            const tipo = document.getElementById("tipoPasta").value;
+            inputsDiv.innerHTML = "";
+            resultadoDiv.innerHTML = "";
+
+            if (tipo === "base") {
+                inputsDiv.innerHTML = `
+                    <label for="riquezaDeseada">¿Qué riqueza deseas preparar?</label>
+                    <input type="number" id="riquezaDeseada" onkeydown="siguienteCampo(event, 'cantidadTotal')">
+                    <label for="cantidadTotal">¿Qué cantidad total deseas preparar?</label>
+                    <input type="number" id="cantidadTotal" onkeydown="calcularEnter(event)">
+                `;
+            } else if (tipo === "una") {
+                inputsDiv.innerHTML = `
+                    <label for="riquezaInicial">¿Qué riqueza estás trabajando?</label>
+                    <input type="number" id="riquezaInicial" onkeydown="siguienteCampo(event, 'gramosInicial')">
+                    <label for="gramosInicial">¿Cuántos gramos de pasta tienes?</label>
+                    <input type="number" id="gramosInicial" onkeydown="siguienteCampo(event, 'riquezaDeseada')" >
+                    <span class="note">Recuerda quitar el peso del bote</span>
+                    <label for="riquezaDeseada">¿Qué riqueza deseas preparar?</label>
+                    <input type="number" id="riquezaDeseada" onkeydown="calcularEnter(event)">
+                `;
+            } else if (tipo === "ambas") {
+                inputsDiv.innerHTML = `
+                    <label for="riquezaInicial">¿Cuál es tu riqueza inicial?</label>
+                    <input type="number" id="riquezaInicial" onkeydown="siguienteCampo(event, 'gramosInicial')">
+                    <label for="gramosInicial">¿Cuántos gramos de pasta tienes?</label>
+                    <input type="number" id="gramosInicial" onkeydown="siguienteCampo(event, 'riquezaDeseada')">
+                    <span class="note">Recuerda quitar el peso del bote</span>
+                    <label for="riquezaDeseada">¿Qué riqueza deseas preparar?</label>
+                    <input type="number" id="riquezaDeseada" onkeydown="siguienteCampo(event, 'riquezaAjuste')">
+                    <label for="riquezaAjuste">¿Cuál es tu riqueza para ajustar?</label>
+                    <input type="number" id="riquezaAjuste" onkeydown="calcularEnter(event)">
+                `;
+            }
+        }
+
+        function siguienteCampo(e, siguienteId) {
+            if (e.key === "Enter") {
+                document.getElementById(siguienteId).focus();
+            }
+        }
+
+        function calcularEnter(e) {
+            if (e.key === "Enter") {
+                calcular();
+            }
+        }
+
+        function calcular() {
+            const tipo = document.getElementById("tipoPasta").value;
+            const vidrio = document.getElementById("vidrio").value;
+            let resultado = "";
+            let riquezaDeseada = parseFloat(document.getElementById("riquezaDeseada").value);
+
+            const baseRiquezas = vidrio === "BL" ? [70, 85] : [60, 88];
+
+            if (baseRiquezas.includes(riquezaDeseada)) {
+                alert("No es posible hacer el cálculo porque tu riqueza deseada es la riqueza base.");
+                return;
+            }
+
+            if (tipo === "base") {
+                let cantidadTotal = parseFloat(document.getElementById("cantidadTotal").value);
+                let r1 = baseRiquezas[0];
+                let r2 = baseRiquezas[1];
+                let g2 = ((riquezaDeseada - r1) * cantidadTotal) / (r2 - r1);
+                let g1 = cantidadTotal - g2;
+                if (g1 < 0 || g2 < 0 || !isFinite(g1) || !isFinite(g2)) {
+                    alert("NO PUEDES HACER ESTA MEZCLA PORQUE TU RIQUEZA DESEADA ES MAYOR O MENOR A TUS RIQUEZAS DE AJUSTE.");
+                    return;
+                }
+                resultado = `Debes mezclar ${Math.round(g1)} g de pasta ${r1}% y ${Math.round(g2)} g de pasta ${r2}% para obtener ${Math.round(cantidadTotal)} g con ${riquezaDeseada}% de riqueza.`;
+            }
+
+            if (tipo === "una") {
+                let riquezaInicial = parseFloat(document.getElementById("riquezaInicial").value);
+                let gramosInicial = parseFloat(document.getElementById("gramosInicial").value);
+                let r = riquezaDeseada > riquezaInicial ? baseRiquezas[1] : baseRiquezas[0];
+                let gramosAgregar = riquezaDeseada > riquezaInicial ?
+                    (gramosInicial * (riquezaDeseada - riquezaInicial)) / (r - riquezaDeseada) :
+                    (gramosInicial * (riquezaInicial - riquezaDeseada)) / (riquezaDeseada - r);
+                if (gramosAgregar < 0 || !isFinite(gramosAgregar)) {
+                    alert("NO PUEDES HACER ESTA MEZCLA PORQUE TU RIQUEZA DESEADA ES MAYOR O MENOR A TUS RIQUEZAS DE AJUSTE.");
+                    return;
+                }
+                let total = gramosInicial + gramosAgregar;
+                resultado = `Debes agregar ${Math.round(gramosAgregar)} g de pasta de ${r}% para obtener ${Math.round(total)} g con ${riquezaDeseada}% de riqueza.`;
+            }
+
+            if (tipo === "ambas") {
+                let riquezaInicial = parseFloat(document.getElementById("riquezaInicial").value);
+                let gramosInicial = parseFloat(document.getElementById("gramosInicial").value);
+                let riquezaAjuste = parseFloat(document.getElementById("riquezaAjuste").value);
+                let gramosAgregar = riquezaDeseada > riquezaInicial ?
+                    (gramosInicial * (riquezaDeseada - riquezaInicial)) / (riquezaAjuste - riquezaDeseada) :
+                    (gramosInicial * (riquezaInicial - riquezaDeseada)) / (riquezaDeseada - riquezaAjuste);
+                if (gramosAgregar < 0 || !isFinite(gramosAgregar)) {
+                    alert("NO PUEDES HACER ESTA MEZCLA PORQUE TU RIQUEZA DESEADA ES MAYOR O MENOR A TUS RIQUEZAS DE AJUSTE.");
+                    return;
+                }
+                let total = gramosInicial + gramosAgregar;
+                resultado = `Debes agregar ${Math.round(gramosAgregar)} g de pasta de ${riquezaAjuste}% para obtener ${Math.round(total)} g con ${riquezaDeseada}% de riqueza.`;
+            }
+
+            resultadoDiv.innerHTML = resultado;
+
+            const now = new Date().toLocaleString();
+            const newRow = `<tr><td>${now}</td><td>${vidrio}</td><td>${tipo}</td><td>${riquezaDeseada}%</td><td>${resultado}</td></tr>`;
+            historialBody.innerHTML += newRow;
+        }
+
+        function limpiar() {
+            inputsDiv.innerHTML = "";
+            resultadoDiv.innerHTML = "";
+            mostrarInputs();
+        }
+
+        mostrarInputs();
+    </script>
+<script>
+function exportarExcel() {
+    var table = document.querySelector("table");
+    var html = table.outerHTML.replace(/<a[^>]*>|<\/a>/g, "");
+    var url = 'data:application/vnd.ms-excel,' + encodeURIComponent(html);
+    var link = document.createElement("a");
+    link.href = url;
+    link.download = "datos_pasta_plata.xls";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+</script>
+
+</body></html>
